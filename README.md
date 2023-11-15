@@ -1,53 +1,26 @@
-<div align="center">
- 
-<!-- ALL-CONTRIBUTORS-BADGE:START - Do not remove or modify this section -->
-[![All Contributors](https://img.shields.io/badge/all_contributors-2-orange.svg?style=flat-square)](#contributors-)
-<!-- ALL-CONTRIBUTORS-BADGE:END -->
- 
+# Gift List
 
- 
-<img  src="https://university.alchemy.com/assets/dashboard_logo.75bc75d8.svg" height="200px" width="200px" />
+To get started with the repository, clone it and then run `npm install` in the top-level directory to install the depedencies.
 
-</div>
+There are three folders in this repository:
 
-# Alchemy University Ethereum Developer Bootcamp answers
+## Client
 
-Contains answers for Ethereum Developer Bootcamp provided by [Alchemy University](https://university.alchemy.com/). Feel Free to contribute your answers here and help each other
+You can run the client from the top-level directory with `node client/index`. This file is a script which will send an HTTP request to the server.
 
-## Want to Contribute? See [Contribution guidelines](https://github.com/pokhrelanmol/AU_ETH_Bootcamp/blob/anmol/CONTRIBUTION.md)
+Think of the client as the _prover_ here. It needs to prove to the server that some `name` is in the `MERKLE_ROOT` on the server. 
 
-## Contributors
+## Server
 
-<!-- ALL-CONTRIBUTORS-LIST:START - Do not remove or modify this section -->
-<!-- prettier-ignore-start -->
-<!-- markdownlint-disable -->
-<table>
-  <tbody>
-    <tr>
-      <td align="center"><a href="https://siddheshkukade.com"><img src="https://avatars.githubusercontent.com/u/65951872?v=4?s=100" width="100px;" alt="Siddhesh Bhupendra Kuakde"/><br /><sub><b>Siddhesh Bhupendra Kuakde</b></sub></a><br /><a href="https://github.com/SiddheshKukade/AU_ETH_Bootcamp/commits?author=SiddheshKukade" title="Code">💻</a></td>
+You can run the server from the top-level directory with `node server/index`. This file is an express server which will be hosted on port 1225 and respond to the client's request.
 
-      <td align="center"><a href="https://github.com/jamaltheatlantean"><img src="https://avatars.githubusercontent.com/u/101756505?v=4?s=100" width="100px;" alt="Gabriel Isobara"/><br /><sub><b>Gabriel Isobara</b></sub></a><br /><a href="https://github.com/SiddheshKukade/AU_ETH_Bootcamp/commits?author=jamaltheatlantean" title="Code">💻</a> <a href="https://github.com/SiddheshKukade/AU_ETH_Bootcamp/commits?author=jamaltheatlantean" title="Documentation">📖</a></td>
+Think of the server as the _verifier_ here. It needs to verify that the `name` passed by the client is in the `MERKLE_ROOT`. If it is, then we can send the gift! 
 
-      <td align="center"><a href="https://github.com/pokhrelanmol"><img src="https://avatars.githubusercontent.com/u/75737628?v=4?s=100" width="100px;" alt="anmol pokhrel"/><br /><sub><b>anmol pokhrel</b></sub></a><br /><a href="https://github.com/SiddheshKukade/AU_ETH_Bootcamp/commits?author=pokhrelanmol" title="Code">💻</a></td>
+## Utils
 
-    </tr>
-  </tbody>
-</table>
+There are a few files in utils:
 
-<!-- markdownlint-restore -->
-<!-- prettier-ignore-end -->
-
-<!-- ALL-CONTRIBUTORS-LIST:END -->
-<!-- prettier-ignore-start -->
-<!-- markdownlint-disable -->
-
-<!-- markdownlint-restore -->
-<!-- prettier-ignore-end -->
-
-<!-- ALL-CONTRIBUTORS-LIST:END -->
-
-<!-- ALL-CONTRIBUTORS-BADGE:START - Do not remove or modify this section -->
-
-[![All Contributors](https://img.shields.io/badge/all_contributors-1-orange.svg?style=flat-square)](#contributors-)
-
-<!-- ALL-CONTRIBUTORS-BADGE:END -->
+- The `niceList.json` which contains all the names of the people who deserve a gift this year (this is randomly generated, feel free to add yourself and others to this list!)
+- The `example.js` script shows how we can generate a root, generate a proof and verify that some value is in the root using the proof. Try it out from the top-level folder with `node/example.js`
+- The `MerkleTree.js` should look familiar from the Merkle Tree module! This one has been modified so you should not have to deal with any crypto type conversion. You can import this in your client/server
+- The `verifyProof.js` should also look familiar. This was the last stage in the module. You can use this function to prove a name is in the merkle root, as show in the example.
